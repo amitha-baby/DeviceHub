@@ -96,6 +96,24 @@ body{
     color: #333333;
 }
 
+/* progress-bar */
+.progress-bar{
+background: #333333;
+color: #ffffff;
+}
+
+.dash-box{
+    text-align: center;
+}
+ 
+#footer{
+    background: #333333;
+    color: #ffffff;
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+}
+
 .circle-icon{
     height: 45px;
     width: 45px;
@@ -108,7 +126,11 @@ body{
 }
 
 .circle-icon-green{
-  background-color: #33a532;
+  background-color: #07a50f;
+}
+
+.circle-icon-orange{
+  background-color: rgb(247, 142, 6);
 }
 
 .circle-icon-grey{
@@ -126,8 +148,6 @@ body{
     padding: 30px;
     margin-top: 30px;
 }
-
-
 
 
 
