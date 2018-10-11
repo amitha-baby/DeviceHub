@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Admin Area | Dashboard</title>
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>  
+      <style>
+        .arc text {
+            font: 12px sans-serif;
+            text-anchor: middle;
+           font-style: initial;
+           text-shadow: 5px;
+           
+        }
+
+        .arc path {
+            stroke: #fff;
+        }
+.form-style-8{
+    font-family: 'Open Sans Condensed', arial, sans;
+    width: 500px;
+    padding: 30px;
+    background: #FFFFFF;
+    margin: 50px auto;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+
+}
+.form-style-8 h2{
+    background: #4D4D4D;
+    text-transform: uppercase;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #797979;
+    font-size: 18px;
+    font-weight: 100;
+    padding: 20px;
+    margin: -30px -30px 30px -30px;
+}
+.form-style-8 input[type="text"],
+.form-style-8 input[type="date"],
+.form-style-8 input[type="datetime"],
+.form-style-8 input[type="email"],
+.form-style-8 input[type="number"],
+.form-style-8 input[type="search"],
+.form-style-8 input[type="time"],
+.form-style-8 input[type="url"],
+.form-style-8 input[type="password"],
+.form-style-8 textarea,
+.form-style-8 select 
+{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 45px;
+}
+.form-style-8 textarea{
+    resize:none;
+    overflow: hidden;
+}
+.form-style-8 input[type="button"], 
+.form-style-8 input[type="submit"]{
+    -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    background-color: #2CBBBB;
+    border: 1px solid #27A0A0;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 14px;
+    padding: 8px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.form-style-8 input[type="button"]:hover, 
+.form-style-8 input[type="submit"]:hover {
+    background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
+    background-color:#34CACA;
+}
+
+    </style>
+
+
+  </head>
+
+  <body>
+    
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Cabot Technology Solutions</a>
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Dashboard</a></li>
+                <li><a href="pages.html">IOS</a></li>
+                <li><a href="posts.html">Android</a></li>
+               <li> <a href="manage.html"> Manage</a>  </li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Welcome</a></li>
+                    <li><a href="login.html">Logout</a></li>
+            </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <h1><i class="fa fa-mobile fa-2x" aria-hidden="true"></i> Dashboard<small>  Manage your Device</small></h1>
+                </div>
+
+                <div class="col-md-2">
+                        <div class="dropdown create">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                  Create Content
+                                  <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="addForm">
+                                  <li><a type="button" data-toggle="modal" data-target="#addPage">Add Page</a></li>
+                                  <li><a href="#">Add Post</a></li>
+                                  <li><a href="#">Add User</a></li> 
+                                </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="active">Add Device</li>
+            </ol>
+        </div>
+    </section>
+
+    <div class="form-style-8">
+        <h2>Add Device</h2>
+        <form id="test-form" method="POST" action="manage.html">
+          
+          <input type="number" name="SLNO" placeholder="Enter serial number" />
+          <input type="text" name="NAME" placeholder="Enter name" />
+          <input type="text" name="STATUS" placeholder="Enter status" />
+          <input type="text" name="MODEL" placeholder="Enter model" />
+          <input type="text" name="ID" placeholder="Enter ID" />
+          <input type="text" name="LOCATION" placeholder="Enter location" />
+
+          <button class="btn btn-default main-color-bg " id="submit-form" type="button">ADD DEVICE</button>
+         
+          
+
+          <!-- <a href="manage.html"><button class="btn btn-default  main-color-bg" id="submit-form" type="button">SUBMIT</button></a> -->
+        </form>
+      </div>
+
+   
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+            <!-- Custom Theme JavaScript -->
+            <script src='google-sheet.js'></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+  
+      
+
+  </script>
+  <!-- <script src="js/service.js"></script> -->
+  <script type="text/javascript" src="data.json"></script>
+ 
+  </body>
+</html>
