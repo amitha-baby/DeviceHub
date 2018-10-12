@@ -2,12 +2,23 @@
 let deviceDataArray = localStorage.getItem('deviceList') ? JSON.parse(localStorage.getItem('deviceList')) : [];
 var jsonObject;
 
+let availCount = 0;
+let missingCount = 0;
+let nochargerCount = 0;
+let notworkingCount = 0;
+
+
+let availDeviceClass = document.getElementById("availDeviceClass");
+let missingDeviceClass = document.getElementById("missingDeviceClass");
+let noChargerDeviceClass = document.getElementById("noChargerDeviceClass");
+let notWorkingDeviceClass = document.getElementById("notWorkingDeviceClass");
+
 localStorage.setItem('deviceList', JSON.stringify(deviceDataArray));
 const dataFromLocalStorage = JSON.parse(localStorage.getItem('deviceList'));
  
 
 var request = new XMLHttpRequest();
-var url = 'https://script.googleusercontent.com/a/macros/cabotsolutions.com/echo?user_content_key=IGUdrzEd5bHowjSL73tAMQouPMaK3VhGtNOsdqWbMugGYIYzNfzcPWNopRbl9yXKDu2885-wArBrcTXx9q-Yqdp1Q8GFEIk4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_nRPgeZU6HP8N3YZ91GNx49FXyl5euMLmjnFAkueCBXj0iX0FmGGH8eysCHO9HnBESumQduuF82BG65TUsf-URlO8TeqEh96kujRJXaOC0_H5yDnhMzfu31zLqmv46PQV&lib=MMKXgi_qUFWSt0nTLnoLjrkylSQPUcriW';
+var url = 'https://script.googleusercontent.com/a/macros/cabotsolutions.com/echo?user_content_key=ty7IquT2VOsoRdotmAj7tz-TrCTNfDHns8Fgxxco8v2gXEP77_7QDAuaT9n2DnJvJjBtkZ_6ITLWuu4O7P5ZQps9IjIiAxrSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_nRPgeZU6HP8N3YZ91GNx49FXyl5euMLmjnFAkueCBXiaVRYyZM5cQbphKptrKjl7-hDBmQBEtxgKwTgRjX0_05v2N8Ym_oTBPLjKh6_FEGNGobvHn3QJCRhmlNqT-jbZ&lib=MvYB3dXCLYXIaqwPl1O-F3ZRuoRp3PEkk';
     request.open('GET',url, true);
         
     request.onload = function () {
@@ -16,29 +27,55 @@ var url = 'https://script.googleusercontent.com/a/macros/cabotsolutions.com/echo
             var json = eval("(" + this.response + ")");
             jsonObject = json["user"];
             const tBody = document.getElementById("deviceList");
+            const deviceClass = document.getElementById("panelBody");
 
             function additem() {
                 for (var device = 0; device < jsonObject.length; device++) {
 
+                    if (deviceDataArray[device].STATUS == "Available") { availCount = availCount + 1;}
+                    else if (deviceDataArray[device].STATUS == "Missing") { missingCount = missingCount + 1;}
+                    else if (deviceDataArray[device].STATUS == "No Charger") { nochargerCount = nochargerCount + 1;}
+                    else if (deviceDataArray[device].STATUS == "Not Working") { notworkingCount = notworkingCount + 1;}
+
                     const tr = document.createElement('tr');
 
                     tr.innerHTML = `
-                    <td>${jsonObject[device].MANUFACTURER}</td>
                     <td>${jsonObject[device].NAME}</td>
-                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].MODEL}</td>
+                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].SERIALNO}</td>
-                    <td>${jsonObject[device].IMEINO}</td>
-                    <td>${jsonObject[device].CHARGE}</td>
+                    <td>${jsonObject[device].ID}</td>
+                    <td>${jsonObject[device].OWNER}</td>
+                    
                     `;
 
                     tBody.appendChild(tr);
-                }
+                }     
+
+                const availDeviceCount  = document.createElement('h2');
+                const missingDeviceCount   = document.createElement('h2');
+                const noChargerDeviceCount   = document.createElement('h2');
+                const notWorkingDeviceCount   = document.createElement('h2');
+
+            availDeviceCount.innerHTML = `<h2>${availCount}</h2>`;
+            availDeviceClass.appendChild(availDeviceCount);
+
+            missingDeviceCount.innerHTML = `<h2>${missingCount}</h2>`;
+            missingDeviceClass.appendChild(missingDeviceCount);
+
+            noChargerDeviceCount.innerHTML = `<h2>${nochargerCount}</h2>`;
+            noChargerDeviceClass.appendChild(noChargerDeviceCount);
+
+            notWorkingDeviceCount.innerHTML = `<h2>${notworkingCount}</h2>`;
+            notWorkingDeviceClass.appendChild(notWorkingDeviceCount);
+
             }
      
+            
+            
         deviceDataArray.push(tBody.value);
         localStorage.setItem('deviceList', JSON.stringify(jsonObject));
-            additem();
+        additem();
 
     } else {
             const errorMessage = document.createElement('marquee');
@@ -58,17 +95,16 @@ var url = 'https://script.googleusercontent.com/a/macros/cabotsolutions.com/echo
             $("#deviceList").empty();
             const tBody = document.getElementById("deviceList");
             for (var device = 0; device < jsonObject.length; device++) {
-
+                
                 if (deviceDataArray[device].STATUS == "Available") {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                    <td>${jsonObject[device].MANUFACTURER}</td>
                     <td>${jsonObject[device].NAME}</td>
-                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].MODEL}</td>
+                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].SERIALNO}</td>
-                    <td>${jsonObject[device].IMEINO}</td>
-                    <td>${jsonObject[device].CHARGE}</td>
+                    <td>${jsonObject[device].ID}</td>
+                    <td>${jsonObject[device].OWNER}</td>
                     `;
                         
                             tBody.appendChild(tr);
@@ -88,13 +124,12 @@ var url = 'https://script.googleusercontent.com/a/macros/cabotsolutions.com/echo
                 if (deviceDataArray[device].STATUS == "No Charger") {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                    <td>${jsonObject[device].MANUFACTURER}</td>
                     <td>${jsonObject[device].NAME}</td>
-                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].MODEL}</td>
+                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].SERIALNO}</td>
-                    <td>${jsonObject[device].IMEINO}</td>
-                    <td>${jsonObject[device].CHARGE}</td>
+                    <td>${jsonObject[device].ID}</td>
+                    <td>${jsonObject[device].OWNER}</td>
                     `;
                         
                             tBody.appendChild(tr);
@@ -114,13 +149,12 @@ var url = 'https://script.googleusercontent.com/a/macros/cabotsolutions.com/echo
                 if (deviceDataArray[device].STATUS == "Not Working") {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                    <td>${jsonObject[device].MANUFACTURER}</td>
                     <td>${jsonObject[device].NAME}</td>
-                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].MODEL}</td>
+                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].SERIALNO}</td>
-                    <td>${jsonObject[device].IMEINO}</td>
-                    <td>${jsonObject[device].CHARGE}</td>
+                    <td>${jsonObject[device].ID}</td>
+                    <td>${jsonObject[device].OWNER}</td>
                     `;
                         
                             tBody.appendChild(tr);
@@ -140,13 +174,12 @@ var url = 'https://script.googleusercontent.com/a/macros/cabotsolutions.com/echo
                 if (deviceDataArray[device].STATUS == "Missing") {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                    <td>${jsonObject[device].MANUFACTURER}</td>
                     <td>${jsonObject[device].NAME}</td>
-                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].MODEL}</td>
+                    <td>${jsonObject[device].STATUS}</td>
                     <td>${jsonObject[device].SERIALNO}</td>
-                    <td>${jsonObject[device].IMEINO}</td>
-                    <td>${jsonObject[device].CHARGE}</td>
+                    <td>${jsonObject[device].ID}</td>
+                    <td>${jsonObject[device].OWNER}</td>
                     `;
                         
                             tBody.appendChild(tr);

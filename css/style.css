@@ -110,6 +110,10 @@ color: #ffffff;
 .dash-box{
     text-align: center;
 }
+
+.dash-box h4{
+color: rgb(12, 108, 235); 
+}
  
 #footer{
     background: #333333;
